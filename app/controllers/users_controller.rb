@@ -3,9 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, only: %i[show]
 
   def new
-    @user = User.new
-
-    render layout: 'slate'
+    @user = User.new  
   end
 
   def create
@@ -17,12 +15,6 @@ class UsersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @users_event = current_user.events
-    @upcoming_events = current_user.upcoming_events
-    @previous_events = current_user.previous_events
   end
 
   private
