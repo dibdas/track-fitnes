@@ -2,17 +2,17 @@ class ExercisesController < ApplicationController
     before_action :authenticate_user, only: %i[show]
     def index
         @exercises = Exercise.all
-      end
+    end
     
-      def show
+    def show
         @exercise = Exercises.find(params[:id])
-      end
+    end
     
-      def new
+    def new
         @article = Exercise.new
-      end
+    end
     
-      def create
+    def create
         @article = Exercise.new(exercise_params)
     
         if @article.save
@@ -20,11 +20,29 @@ class ExercisesController < ApplicationController
         else
           render :new
         end
-      end
+    end
+
+  def update
+    @exercise = Exercise.find(params[:id])
+
+    if @exercise.update(exercise_params)
+      redirect_to @exercise
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @exercise = Exercise.find(params[:id])
+    @exercise.destroy
+
+    redirect_to root_path
+  end
+
     
       private
-        def article_params
-          params.require(:erxercise).permit(:name, :unit)
+        def exercise_params
+          params.require(:exercise).permit(:name, :unit)
         end
     end
 end
