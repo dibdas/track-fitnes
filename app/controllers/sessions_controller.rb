@@ -1,18 +1,21 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_request
+  prepend SimpleCommand
   def new
     render layout: 'slate'
   end
 
   def create
-    @user = User.find_by(name: params[:name])
+    @user = User.find_by(email: params[:email])
 
-    if @user
+    if @user.authenticate(params:[:password])
+      JsonWebToken.encode(user_id: user.id)
+      render json: @user.as_json,status:created,JsonWebToken
       @current_user= @user
       sign_in(@user)
    
     else
-      flash.now[:error] = 'Invalid name'
-      render :new
+      head(:unauthorized)
     end
   end
 

@@ -18,7 +18,7 @@ class ExercisesController < ApplicationController
     @article = Exercise.new(exercise_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to @exercise
     else
       render :new
     end
