@@ -1,14 +1,13 @@
 
 class AuthenticationController < ApplicationController
-  attr_reader :user
+ 
     skip_before_action :authenticate_request
  
    
     def authenticate
       command = AuthenticateUser.call(params[:email], params[:password])
-
-   
       if command.success?
+        puts command.user
         render json: { auth_token: command.user }
       else
         render json: { error: command.errors }, status: :unauthorized

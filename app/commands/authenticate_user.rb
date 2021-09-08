@@ -16,11 +16,11 @@ class AuthenticateUser
   
     # attr_accessor :email, :password
   
-    def user
+  
+    def authorize
       @user = User.find_by_email(email)
       return @user if @user && @user.authenticate(password)
-      # @user.errors.add :user_authentication, 'invalid credentials'
-      # head(:unauthorized)
+      head(:unauthorized)
     end
   
    
