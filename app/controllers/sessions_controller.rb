@@ -11,9 +11,7 @@ class SessionsController < ApplicationController
     if @user.authenticate(params:[:password])
       JsonWebToken.encode(user_id: user.id)
       render json: @user.as_json,status:created,JsonWebToken
-      @current_user= @user
-      sign_in(@user)
-   
+
     else
       head(:unauthorized)
     end
