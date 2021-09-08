@@ -1,7 +1,7 @@
 class MeasurementsController < ApplicationController
   before_action :authenticate_user
   def index
-    @measurements = Measurement.includes(:exercise,:user).where(user_id: current_user.id)
+    @measurements = Measurement.includes(:exercise,:user).where(user_id: current_user)
     render :json => @measurements
   end
 

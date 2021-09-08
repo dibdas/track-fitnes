@@ -11,13 +11,13 @@ class ExercisesController < ApplicationController
   end
 
   def new
-    @article = Exercise.new
+    @exercise = Exercise.new
   end
 
   def create
-    @article = Exercise.new(exercise_params)
+    @exercise = Exercise.new(exercise_params)
 
-    if @article.save
+    if @exercise.save
       redirect_to @exercise
     else
       render :new
