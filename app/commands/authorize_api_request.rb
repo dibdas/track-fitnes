@@ -1,4 +1,4 @@
-class AuthorizeApiRequest
+  class AuthorizeApiRequest
     prepend SimpleCommand
   
     def initialize(headers = {})
@@ -6,20 +6,20 @@ class AuthorizeApiRequest
     end
   
     def call
-      user
+      api_request
     end
   
     private
   
     attr_reader :headers
   
-    def user
-      @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    def api_request
+      @user ||= decoded_auth_token if decoded_auth_token
       @user || errors.add(:token, 'Invalid token') && nil
     end
   
     def decoded_auth_token
-      @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+      @decoded_auth_token ||= JWT.decode(http_auth_header, "MY_SECRET_KEY")
     end
   
     def http_auth_header
