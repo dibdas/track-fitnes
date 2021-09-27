@@ -1,4 +1,3 @@
-
 class AuthenticateUser
   prepend SimpleCommand
   attr_reader :user, :email, :password, :token
@@ -7,7 +6,7 @@ class AuthenticateUser
     @password = password
   end
   def call
-    @token = JWT.encode(user, "MY_SECRET_KEY") if authorize
+    @token = JWT.encode(user.email, "MY_SECRET_KEY") if authorize
   end
   private
   def authorize
