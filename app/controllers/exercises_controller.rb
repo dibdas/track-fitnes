@@ -1,13 +1,13 @@
 class ExercisesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_request
   def index
     @exercises = Exercise.all
-    render :json => Exercises
+    render json: Exercises
   end
 
   def show
     @exercise = Exercises.find(params[:id])
-    render :json => @exercise
+    render json: @exercise
   end
 
   def new

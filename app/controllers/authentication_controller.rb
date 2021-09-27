@@ -4,12 +4,13 @@ class AuthenticationController < ApplicationController
   def new
     @user = User.new
   end
+
   def create
     @user = User.new(name: params[:name],
-                    email: params[:email],
-                    password: params[:password])
+                     email: params[:email],
+                     password: params[:password])
     if @user.save
-      render json: {status: 200, msg: "You are currently Logged-in as", success: 'Successfully created your account'}
+      render json: { status: 200, msg: 'You are currently Logged-in as', success: 'Successfully created your account' }
     else
       render :new
     end
@@ -24,4 +25,4 @@ class AuthenticationController < ApplicationController
       render json: { error: command.user.errors }, status: :unauthorized
     end
   end
- end 
+end

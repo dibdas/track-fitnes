@@ -8,5 +8,4 @@ class ApplicationController < ActionController::API
     @current_user = User.find_by(email: AuthorizeApiRequest.call(request.headers).result[0])
     render json: { error: 'Not Authorized' }, status: 401 unless @current_user
   end
-​
 end
