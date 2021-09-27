@@ -1,3 +1,4 @@
+
   class AuthorizeApiRequest
     prepend SimpleCommand
   
@@ -19,7 +20,7 @@
     end
   
     def decoded_auth_token
-      @decoded_auth_token ||= JWT.decode(http_auth_header, "MY_SECRET_KEY")
+      JWT.decode(http_auth_header.to_s, "MY_SECRET_KEY")
     end
   
     def http_auth_header
@@ -31,3 +32,4 @@
       nil
     end
   end
+
