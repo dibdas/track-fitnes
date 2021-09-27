@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-   before_action :authenticate_request
+  before_action :authenticate_request
 
   def index
     @measurements = Measurement.includes(:exercise, :user).where(user_id: current_user)
