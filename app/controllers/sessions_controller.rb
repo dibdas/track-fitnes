@@ -1,3 +1,5 @@
+# rubocop : disable Lint/Syntax
+
 class SessionsController < ApplicationController
   skip_before_action :authenticate_request
   prepend SimpleCommand
@@ -10,7 +12,7 @@ class SessionsController < ApplicationController
 
     if @user.authenticate(params:[:password])
       JsonWebToken.encode(user_id: user.id)
-      render json: @user.as_json,status:created,JsonWebToken
+      render json: @user.as_json,status:created,JsonWebToken 
     else
       head(:unauthorized)
     end
@@ -21,3 +23,5 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 end
+
+

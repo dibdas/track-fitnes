@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :authenticate_request
+  before_action :authenticate_user!
   def index
     @exercises = Exercise.all
     render json: Exercises
