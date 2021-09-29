@@ -15,7 +15,7 @@ class AuthenticateUser
 
   def authorize
     @user = User.find_by_email(email)
-    return @user if @user & @user.authenticate(password)
+    return @user if @user&.authenticate(password)
     # head(:unauthorized)
   end
 end
