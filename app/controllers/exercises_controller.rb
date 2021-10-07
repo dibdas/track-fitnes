@@ -29,7 +29,7 @@ class ExercisesController < ApplicationController
     if @exercise.update(exercise_params)
       render json: @exercise
     else
-      render json: {errors: @exercise.errors}
+      render json: { errors: @exercise.errors }
     end
   end
 
