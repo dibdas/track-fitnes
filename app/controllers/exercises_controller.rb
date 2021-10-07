@@ -16,9 +16,8 @@ class ExercisesController < ApplicationController
 
   def create
     @exercise = Exercise.new(exercise_params)
-
     if @exercise.save
-      redirect_to @exercise
+      render json: @exercise, status: :created
     else
       render :new
     end
@@ -28,17 +27,16 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.find(params[:id])
 
     if @exercise.update(exercise_params)
-      redirect_to @exercise
+      render json: @exercise
     else
-      render :edit
+      render json: {errors: @exercise.errors}
     end
   end
 
   def destroy
     @exercise = Exercise.find(params[:id])
     @exercise.destroy
-
-    redirect_to root_path
+    head :ok
   end
 
   private
